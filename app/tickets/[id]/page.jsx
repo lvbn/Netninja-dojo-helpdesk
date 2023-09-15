@@ -2,6 +2,7 @@ import { notFound } from "next/navigation"
 export const dynamicParams = true
 
 export async function generateStaticParams() {
+  await new Promise(resolve => setTimeout(resolve, 3000))
   // all id routes are generated before (build time ?) and rady to be served
   const res = await fetch('http://localhost:4000/tickets/')
 

@@ -1,4 +1,6 @@
+import { Suspense } from "react"
 import TicketList from "./TicketList.jsx"
+import Loading from "../loading.jsx"
 
 
 export default function Tickets() {
@@ -11,7 +13,13 @@ export default function Tickets() {
         </div>
       </nav>
 
-      <TicketList />
+      {/*
+        The Suspense component wraps only what has to display the loading component.
+        Without The Suspense component the entire Tickets component will be automatically wrapped and the loading component will appear in front of everything.
+       */}
+      <Suspense fallback={<Loading />}>
+        <TicketList />
+      </Suspense>
     </main>
   )
 }
