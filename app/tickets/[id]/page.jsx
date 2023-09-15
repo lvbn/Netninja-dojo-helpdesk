@@ -1,9 +1,27 @@
+
+export const dynamicParams = true
+
+export async function generateStaticParams() {
+  // all id routes are generated before (build time ?) and rady to be served
+  const res = await fetch('http://localhost:4000/tickets/')
+
+  const tickets = await res.json()
+
+  return tickets.map((ticket) => ({
+    id: ticket.id
+  }))
+}
+
 async function getTicket(id) {
   const res = await fetch('http://localhost:4000/tickets/' + id, {
     next: {
       revalidate: 60 // use 0 to opt out of using cache
     }
   })
+
+  if (!res.ok) {
+    notFound()
+  }
 
   return res.json()
 }
