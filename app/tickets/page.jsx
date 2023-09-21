@@ -1,7 +1,7 @@
 import { Suspense } from "react"
-import TicketList from "./TicketList.jsx"
-import Loading from "../loading.jsx"
-
+import TicketList from "./TicketList"
+import Loading from "../loading"
+import Link from "next/link"
 
 export default function Tickets() {
   return (
@@ -9,14 +9,12 @@ export default function Tickets() {
       <nav>
         <div>
           <h2>Tickets</h2>
-          <p><small>currently open tickets.</small></p>
+          <p><small>Currently open tickets.</small></p>
         </div>
+        <Link href="/tickets/create" className="ml-auto">
+          <button className="btn-primary">New Ticket</button>
+        </Link>
       </nav>
-
-      {/*
-        The Suspense component wraps only what has to display the loading component.
-        Without The Suspense component the entire Tickets component will be automatically wrapped and the loading component will appear in front of everything.
-       */}
       <Suspense fallback={<Loading />}>
         <TicketList />
       </Suspense>
